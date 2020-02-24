@@ -35,10 +35,10 @@ Wie sieht die Ausgabe dieses Programms aus?
 
 ```java
 int number = 12; 
-System.out.println(number/5);
-System.out.println(number/5.0);
-number += 7; 
-System.out.println(number);
+System.out.println(number/5);   "2"
+System.out.println(number/5.0);  "2.4"
+number += 7;  
+System.out.println(number); "19"
 ```
 
 ## Datentypen (5 Punkte)
@@ -46,10 +46,70 @@ System.out.println(number);
 Welche Datentypen kennst du? 
 Gibt es Unterschiede bei der Verwendung zwischen einem `int` und einem `Integer`? 
 
+
+Wahrheitswerte
+boolean
+
+ganzzahlige Werte:
+byte
+short 
+int
+
+Kommazahlen:
+float
+float
+double
+
+zeichen:
+char
+
+zeichenkette:
+String
+
+array
+
+Integer:
+int + Methoden z.B: leftshift, rightshift, vorzeichen, highest/lowest bit, string konvertierung, ....
+
 ## Scope (5 Punkte) 
 
 Was ist der Scope einer Variable? 
 Erkläre anhand eines kleinen Beispielprogramms.
 
 
+"Lebenszeit/Anwendungsbereich einer Variable"
 
+
+```java
+public class Main {
+
+ private static void liveGame(int[][] field, int[][] nextGen) {
+        int aliveNeighbours;                    /*in der gesamten Methode sichtbar*/ 
+        for (int i = 0; i < 10; i++) {          /*i start*/
+            for (int j = 0; j < 10; j++) {      /*j start */
+                aliveNeighbours = 0;
+                for (int k = -1; k <= 1; k++) {  /*k start*/
+                    for (int l = -1; l <= 1; l++) {  /*l start*/
+                        try {
+                            aliveNeighbours += field[i + k][j + l];
+
+                        } catch (ArrayIndexOutOfBoundsException e) {
+
+                        }
+                    } /* l end*/
+                } /*k end*/
+                aliveNeighbours -= field[i][j];
+
+                if ((field[i][j] == 1) && (aliveNeighbours < 2))
+                    nextGen[i][j] = 0;
+                else if ((field[i][j] == 1) && (aliveNeighbours > 3))
+                    nextGen[i][j] = 0;
+                else if ((field[i][j] == 0) && (aliveNeighbours == 3))
+                    nextGen[i][j] = 1;
+                else
+                    nextGen[i][j] = field[i][j];
+            } /* j ends */
+        } /* i end */
+    }
+}
+```
